@@ -6,8 +6,8 @@ static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "JetBrains Mono Medium Medium Nerd Font:size=10" };
+static const char dmenufont[]       = "JetBrains Mono Medium Medium Nerd Font:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -20,7 +20,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+//static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = {"","" ,"","web","code","chat","","","hello"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,6 +31,8 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+        { "Pavucontrol", NULL,    NULL,       0,            1,           -1 },
+        { "ranger",   NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -48,6 +51,10 @@ static const Layout layouts[] = {
 /* key definitions */
 // #define MODKEY Mod1Mask     // here Mod1Mask means alt key
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask             //  defining ALT key
+#define CTRL ControlMask            // defining control key
+
+
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -61,9 +68,11 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *ranger[]  = { "st", "-e", "ranger" };
 static const char *screenshot[] = { "flameshot","gui"};
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+        { MODKEY,                       XK_e,      spawn,          {.v = ranger } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot } },
